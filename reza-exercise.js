@@ -16,6 +16,34 @@ const company = {
   },
 };
 
+// a) Access the selected dep budget
+const getSelctedDepartmentBudget = (dep) => {
+    if (!Object.keys(company.departments).some((selecteddeps) => {
+        return selecteddeps === dep
+    })) {
+        return 'There is no such department in the company!'
+    }
+    return company.departments[dep].budget
+}
+console.log(getSelctedDepartmentBudget('hr'))
+
+// c) Calculate total employees
+//Method 1
+let totalEmployee =null
+Object.values(company.departments).forEach((deps) => {
+    totalEmployee = totalEmployee + deps.employees
+})
+console.log(totalEmployee)
+//Method 2
+const totalEmployeesArray = Object.values(company.departments).map((item) => {
+    return item.employees
+})
+console.log(totalEmployeesArray.reduce((acc, cur) => {
+    return acc + cur
+},0))
+
+
+
 const people = {
   ali: 23,
   jay: 31,
