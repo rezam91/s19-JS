@@ -50,7 +50,16 @@ const people = {
   reza: 32,
 };
 
+const agesArray = Object.values(people)
+console.log(agesArray.reduce((acc, cur) => {
+    return acc + cur
+},0)/agesArray.length)
+
 const peopleAsString = "Shakiba,Pedram,Maryam";
+const step2 = peopleAsString.split(',').map((person) => {
+    return [person.toLocaleLowerCase(), person.length]
+})
+console.log(Object.fromEntries(step2))
 
 const students = [
   {
