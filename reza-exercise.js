@@ -83,7 +83,7 @@ const students = [
     courses: {
       biology: 13,
       english: 17,
-      math: 15,
+      math: 5,
     },
   },
   {
@@ -103,3 +103,74 @@ const students = [
     },
   },
 ];
+
+//Calculating student's average
+const getAverageOfStudent = (name) => {
+    const studentProfile = students.find((person) => {
+        return person.name === name
+    })
+    if (!studentProfile) {
+        return 'There is no such student'
+    }
+    if (!Object.values(studentProfile.courses).length) {
+        return 'There is No Courses'
+    }
+    return Object.values(studentProfile.courses).reduce((acc, cur) => {
+        return acc + cur
+    },0)/Object.values(studentProfile.courses).length
+}
+console.log(getAverageOfStudent('Ethan'))
+
+//Calculating selected course average in class
+const getSelectedLessonAverage = (course) => {
+    const selectedCourseScores = students.map((person) => {
+        return person.courses[course]
+    })
+    const step4 = selectedCourseScores.filter((mark) => {
+        return !!mark
+    })
+    return step4.reduce((acc, cur) => {
+        return acc + cur
+    },0)/step4.length
+}
+console.log(getSelectedLessonAverage('music'))
+
+//Calculating score of selected course for selected student
+const getscoresOfSelectedCourse = (name, course) => {
+    const step3 = students.find((person)=>{
+        return person.name === name
+    })
+    if (!step3) {
+        return 'There is no such student!'
+    }
+    if (!step3.courses[course]) {
+        return 'Selected student does not have selected lesson'
+    }
+    return step3.courses[course]
+}
+console.log(getscoresOfSelectedCourse('Ethan','math'))
+
+//student has selected course ?
+const studentHasCourse = (name, course) => {
+    const step5=students.find((person) => {
+        return person.name === name
+    })
+    if (!step5) {
+        return 'There is no such student'
+    }
+    if (!step5.courses[course]) {
+        return false
+    }
+    return true
+}
+console.log(studentHasCourse('Ethan', 'geography'))
+
+//Get Failed people on selected course
+const getFailedPeople = (course) => {
+    return students.filter((students) => {
+        return students.courses[course]<10
+    }).map((namestu) => {
+        return namestu.name
+    })
+}
+console.log(getFailedPeople('math'))
